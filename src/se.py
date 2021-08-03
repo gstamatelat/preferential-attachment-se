@@ -375,7 +375,7 @@ class RandomSystematicPartitioning:
     The :meth:`~se.RandomSystematicPartitioning.add_items` may be used to insert items into the RST when the population
     is known and exists in a concrete collection and at the same time a mapping function exists that maps the elements
     with their frequencies. In a simple case where the elements along with their frequencies are stored in a dictionary
-    `dict[object, int]` a typical use case would be the following
+    `dict[object, int]` a typical use case would be the following:
 
     .. code-block:: python
 
