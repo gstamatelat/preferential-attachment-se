@@ -11,7 +11,7 @@ run: $(VENV)/$(VENV_BIN)/activate
 
 .PHONY: clean
 clean:
-	rm -rf __pycache__
+	rm -rf src/__pycache__
 	rm -rf $(VENV)
 	rm -rf build
 
