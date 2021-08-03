@@ -24,7 +24,6 @@ author = 'Giorgos Stamatelatos'
 # The full version, including alpha/beta/rc tags
 release = '1.0'
 
-
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -33,6 +32,8 @@ release = '1.0'
 extensions = [
     'sphinx.ext.autodoc'
 ]
+
+html_show_sphinx = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
