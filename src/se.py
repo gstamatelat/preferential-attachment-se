@@ -503,6 +503,8 @@ class RandomSystematicPartitioning:
         insertion in-between. It always runs in time proportional to `n` regardless of the properties of the elements
         inside the data structure.
 
+        :raises ValueError: If the conditions specified (the divisibility and the max frequency) are not fulfilled.
+
         :return: The partition held in this instance.
         :rtype: list[set[object]]
         """
