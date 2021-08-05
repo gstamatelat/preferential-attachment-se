@@ -9,3 +9,5 @@ RandomSystematicPartitioning
 .. autoclass:: se.RandomSystematicPartitioning
    :members:
    :show-inheritance:
+
+   .. automethod:: __init__
