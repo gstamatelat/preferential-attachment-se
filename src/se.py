@@ -442,6 +442,7 @@ class RandomSystematicPartitioning:
         :return: The instance itself (self).
         :type: RandomSystematicPartitioning
         """
+
         if frequency < 1:
             raise ValueError(f"frequency cannot be less than 1, got {frequency}")
         self.__n += frequency
