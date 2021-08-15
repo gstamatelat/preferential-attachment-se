@@ -21,7 +21,7 @@ The `se` package
 
    Github <https://github.com/gstamatelat/preferential-attachment-se>
 
-The `se` package provides implementations of the SE-A, SE-X and SE-Y algorithms. They are algorithms for the generation
+The `se` package provides implementations of the SE-A, SE-B and SE-C algorithms. They are algorithms for the generation
 of scale-free random graphs via the preferential attachment mechanism. These algorithms differ from traditional graph
 generators (like the Barabási–Albert model) as they are exact in terms of the inclusion probabilities of the vertices
 during the preferential attachment step as opposed to approximations. The algorithms also run in linear time in respect

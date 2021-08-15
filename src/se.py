@@ -1,5 +1,5 @@
 """
-Implementations of the SE-A, SE-X and SE-Y graph generators and some auxiliary utilities.
+Implementations of the SE-A, SE-B and SE-C graph generators and some auxiliary utilities.
 """
 from __future__ import annotations
 
@@ -56,9 +56,9 @@ def se_a(n: int, rng: Random) -> nx.Graph:
     return g
 
 
-def se_x(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
     """
-    Returns a random graph using the SE-X preferential attachment algorithm.
+    Returns a random graph using the SE-B preferential attachment algorithm.
 
     This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
 
@@ -147,9 +147,9 @@ def se_x(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
     return g
 
 
-def se_y(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
     """
-    Returns a random graph using the SE-Y preferential attachment algorithm.
+    Returns a random graph using the SE-C preferential attachment algorithm.
 
     This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
 
