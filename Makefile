@@ -5,9 +5,8 @@ else
 	VENV_BIN = bin
 endif
 
-.PHONY: run
-run: $(VENV)/$(VENV_BIN)/activate
-	./$(VENV)/$(VENV_BIN)/python src/se.py
+.PHONY: all
+all: sphinx
 
 .PHONY: clean
 clean:
@@ -25,6 +24,6 @@ sphinx: $(VENV)/$(VENV_BIN)/activate
 
 .PHONY: help
 help:
-	@echo "make run:    Run the project"
+	@echo "make:        Build documentation"
 	@echo "make clean:  Clean the project"
 	@echo "make sphinx: Build documentation"
