@@ -1,7 +1,5 @@
 # Preferential Attachment SE
 
-Strict scale-free graph generators.
+Supplementary material of submission "Whole Sampling Generation of Scale-Free Graphs".
 
-Supplementary material.
-
-Read the documentation: https://james.gr/preferential-attachment-se/
+Documentation: https://james.gr/preferential-attachment-se/
