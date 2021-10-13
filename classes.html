@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Auxiliary functions" href="functions.html" />
 
-    <meta name="generator" content="sphinx-4.1.2, furo 2021.08.11.beta42"/>
+    <meta name="generator" content="sphinx-4.2.0, furo 2021.10.09"/>
         <title>Auxiliary classes - se 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=197f00461d56902ea7ca048ec6e6ba026f62c97b" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=93475b62d1c3bc01323a0eefdc14a62d77b12690" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
     
     
 
@@ -32,9 +32,11 @@
   
     }
   }
-</style>
-    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css"></head>
+</style></head>
   <body>
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
     
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
@@ -172,7 +174,7 @@
   </aside>
   <div class="main">
     <div class="content">
-      <article role="main">
+      <div class="article-container">
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
@@ -187,7 +189,8 @@
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
-        <section id="auxiliary-classes">
+        <article role="main">
+          <section id="auxiliary-classes">
 <h1>Auxiliary classes<a class="headerlink" href="#auxiliary-classes" title="Permalink to this headline">¶</a></h1>
 <p>List of auxiliary classes with public API that are related to the problem of random sampling.</p>
 <section id="randomsystematicpartitioning">
@@ -197,22 +200,22 @@
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">RandomSystematicPartitioning</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">random.Random</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#se.RandomSystematicPartitioning" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Implementation of the random systematic partitioning scheme.</p>
-<p>Random systematic partitioning (RST) randomly partitions the input collection into groups of <cite>k</cite> elements such that
+<p>Random systematic partitioning (RSP) randomly partitions the input collection into groups of <cite>k</cite> elements such that
 each group contains only unique elements. The number of groups itself is implicitly defined by the ratio of the sum
 of frequencies over <cite>k</cite>. The algorithm implemented in this class is heavily influenced by the systematic random
 sampling design. If the elements cannot be partitioned in such a way, then <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code> is raised from the
 <a class="reference internal" href="#se.RandomSystematicPartitioning.partition" title="se.RandomSystematicPartitioning.partition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">partition()</span></code></a> method.</p>
-<p>The interface allows you to add elements into the RST using the methods
+<p>The interface allows you to add elements into the RSP using the methods
 <a class="reference internal" href="#se.RandomSystematicPartitioning.add_item" title="se.RandomSystematicPartitioning.add_item"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_item()</span></code></a> and <a class="reference internal" href="#se.RandomSystematicPartitioning.add_items" title="se.RandomSystematicPartitioning.add_items"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_items()</span></code></a> and then it
 is possible to use the method <a class="reference internal" href="#se.RandomSystematicPartitioning.partition" title="se.RandomSystematicPartitioning.partition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">partition()</span></code></a> to do the actual partitioning. By
 itself the <a class="reference internal" href="#se.RandomSystematicPartitioning.partition" title="se.RandomSystematicPartitioning.partition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">partition()</span></code></a> does not change the state of the instance.</p>
 <p>Below is a typical use case that will partition 2 copies of the element ‘a’ and the elements ‘b’ and ‘c’ into groups
 of 2.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rst</span> <span class="o">=</span> <span class="n">RandomSystematicPartitioning</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">())</span>
-<span class="n">rst</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">rst</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">rst</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'c'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">rst</span><span class="o">.</span><span class="n">partition</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rsp</span> <span class="o">=</span> <span class="n">RandomSystematicPartitioning</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">())</span>
+<span class="n">rsp</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">rsp</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rsp</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'c'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rsp</span><span class="o">.</span><span class="n">partition</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>Because the element ‘a’ exists twice in the input collection, the only possible partitioning is the two groups
@@ -223,23 +226,23 @@ consecutive calls. The actual randomization (or shuffling) is performed online a
 Statistically independent partitions (even of the same input data) must rely on different instances of this class
 and not different invocations of the <a class="reference internal" href="#se.RandomSystematicPartitioning.partition" title="se.RandomSystematicPartitioning.partition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">partition()</span></code></a> method. As a result, calling
 <a class="reference internal" href="#se.RandomSystematicPartitioning.partition" title="se.RandomSystematicPartitioning.partition"><code class="xref py py-meth docutils literal notranslate"><span class="pre">partition()</span></code></a> is normally not required or needed.</p>
-<p>The <a class="reference internal" href="#se.RandomSystematicPartitioning.add_items" title="se.RandomSystematicPartitioning.add_items"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_items()</span></code></a> may be used to insert items into the RST when the population
+<p>The <a class="reference internal" href="#se.RandomSystematicPartitioning.add_items" title="se.RandomSystematicPartitioning.add_items"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_items()</span></code></a> may be used to insert items into the RSP when the population
 is known and exists in a concrete collection and at the same time a mapping function exists that maps the elements
 with their frequencies. In a simple case where the elements along with their frequencies are stored in a dictionary
 <cite>dict[object, int]</cite> a typical use case would be the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">frequencies</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-<span class="n">rst</span> <span class="o">=</span> <span class="n">RandomSystematicPartitioning</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">())</span>
-<span class="n">rst</span><span class="o">.</span><span class="n">add_items</span><span class="p">(</span><span class="n">frequencies</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">frequencies</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">rst</span><span class="o">.</span><span class="n">partition</span><span class="p">())</span>
+<span class="n">rsp</span> <span class="o">=</span> <span class="n">RandomSystematicPartitioning</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">())</span>
+<span class="n">rsp</span><span class="o">.</span><span class="n">add_items</span><span class="p">(</span><span class="n">frequencies</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">frequencies</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rsp</span><span class="o">.</span><span class="n">partition</span><span class="p">())</span>
 </pre></div>
 </div>
 <p>The interface of this class also allows the use of builder-like syntax because the <cite>add_*</cite> methods return the
 instance itself, for example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rst</span> <span class="o">=</span> <span class="n">RandomSystematicPartitioning</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">())</span>
-<span class="n">rst</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rsp</span> <span class="o">=</span> <span class="n">RandomSystematicPartitioning</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">Random</span><span class="p">())</span>
+<span class="n">rsp</span><span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
    <span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
    <span class="o">.</span><span class="n">add_item</span><span class="p">(</span><span class="s1">'c'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">rst</span><span class="o">.</span><span class="n">partition</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rsp</span><span class="o">.</span><span class="n">partition</span><span class="p">())</span>
 </pre></div>
 </div>
 <dl class="py method">
@@ -319,7 +322,7 @@ of their frequencies.</p>
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="se.RandomSystematicPartitioning.partition">
-<span class="sig-name descname"><span class="pre">partition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#se.RandomSystematicPartitioning.partition" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">partition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">set</span><span class="p"><span class="pre">[</span></span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#se.RandomSystematicPartitioning.partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the partition held by this instance.</p>
 <p>More formally, this method returns a list of sets of elements, where each set contains <cite>k</cite> unique elements. This
 method will raise <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code> if the elements inserted up until the point that this method is called
@@ -347,7 +350,8 @@ inside the data structure.</p>
 </section>
 </section>
 
-      </article>
+        </article>
+      </div>
       <footer>
         
         <div class="related-pages">
@@ -366,8 +370,7 @@ inside the data structure.</p>
         </div>
 
         <div class="related-information">
-              Copyright &#169; 2021, Giorgos Stamatelatos
-            |
+              Copyright &#169; 2021, Giorgos Stamatelatos |
             <a class="muted-link" href="_sources/classes.rst.txt"
                rel="nofollow">
               Show Source
