@@ -207,25 +207,25 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
         if g.has_node(source):
             raise ValueError(f"The initial graph contains node {source} already")
         # Start the random systematic partitioning
-        rst: RandomSystematicPartitioning = RandomSystematicPartitioning(m, rng)
-        # Select one random old hyperedge and insert its elements into the RST. At the same time create the edges too.
+        rsp: RandomSystematicPartitioning = RandomSystematicPartitioning(m, rng)
+        # Select one random old hyperedge and insert its elements into the RSP. At the same time create the edges too.
         for v in shuffled(rng.choice(hyperedge_list), rng):
-            rst.add_item(v, 1)
+            rsp.add_item(v, 1)
             g.add_edge(source, v)
-        # Insert m copies of source into the RST
-        rst.add_item(source, m)
-        # Randomly select m-2 old hyperedges and add them into the RST
+        # Insert m copies of source into the RSP
+        rsp.add_item(source, m)
+        # Randomly select m-2 old hyperedges and add them into the RSP
         random_old_hyperedges: list[int] = list(random_selections(len(hyperedge_list), m - 2, rng))
         for i in random_old_hyperedges:
             for v in hyperedge_list[i]:
-                rst.add_item(v, 1)
-        # Run the partitioning in the RST
-        rst_iter: typing.Iterator[set[object]] = iter(rst.partition())
-        # Replace m-2 rows of the RST into the random m-2 old hyperedges previously selected and insert the other 2
+                rsp.add_item(v, 1)
+        # Run the partitioning in the RSP
+        rsp_iter: typing.Iterator[set[object]] = iter(rsp.partition())
+        # Replace m-2 rows of the RSP into the random m-2 old hyperedges previously selected and insert the other 2
         for i in random_old_hyperedges:
-            hyperedge_list[i] = next(rst_iter)
-        hyperedge_list.append(next(rst_iter))
-        hyperedge_list.append(next(rst_iter))
+            hyperedge_list[i] = next(rsp_iter)
+        hyperedge_list.append(next(rsp_iter))
+        hyperedge_list.append(next(rsp_iter))
         # Advance source
         source += 1
 
@@ -343,13 +343,13 @@ class RandomSystematicPartitioning:
     """
     Implementation of the random systematic partitioning scheme.
 
-    Random systematic partitioning (RST) randomly partitions the input collection into groups of `k` elements such that
+    Random systematic partitioning (RSP) randomly partitions the input collection into groups of `k` elements such that
     each group contains only unique elements. The number of groups itself is implicitly defined by the ratio of the sum
     of frequencies over `k`. The algorithm implemented in this class is heavily influenced by the systematic random
     sampling design. If the elements cannot be partitioned in such a way, then :class:`ValueError` is raised from the
     :meth:`~se.RandomSystematicPartitioning.partition` method.
 
-    The interface allows you to add elements into the RST using the methods
+    The interface allows you to add elements into the RSP using the methods
     :meth:`~se.RandomSystematicPartitioning.add_item` and :meth:`~se.RandomSystematicPartitioning.add_items` and then it
     is possible to use the method :meth:`~se.RandomSystematicPartitioning.partition` to do the actual partitioning. By
     itself the :meth:`~se.RandomSystematicPartitioning.partition` does not change the state of the instance.
@@ -359,11 +359,11 @@ class RandomSystematicPartitioning:
 
     .. code-block:: python
 
-       rst = RandomSystematicPartitioning(2, random.Random())
-       rst.add_item('a', 2)
-       rst.add_item('b', 1)
-       rst.add_item('c', 1)
-       print(rst.partition())
+       rsp = RandomSystematicPartitioning(2, random.Random())
+       rsp.add_item('a', 2)
+       rsp.add_item('b', 1)
+       rsp.add_item('c', 1)
+       print(rsp.partition())
 
     Because the element 'a' exists twice in the input collection, the only possible partitioning is the two groups
     (a, b) and (a, c). The actual order of the groups returned is not important as the elements are randomly shuffled
@@ -374,7 +374,7 @@ class RandomSystematicPartitioning:
     and not different invocations of the :meth:`~se.RandomSystematicPartitioning.partition` method. As a result, calling
     :meth:`~se.RandomSystematicPartitioning.partition` is normally not required or needed.
 
-    The :meth:`~se.RandomSystematicPartitioning.add_items` may be used to insert items into the RST when the population
+    The :meth:`~se.RandomSystematicPartitioning.add_items` may be used to insert items into the RSP when the population
     is known and exists in a concrete collection and at the same time a mapping function exists that maps the elements
     with their frequencies. In a simple case where the elements along with their frequencies are stored in a dictionary
     `dict[object, int]` a typical use case would be the following:
@@ -382,20 +382,20 @@ class RandomSystematicPartitioning:
     .. code-block:: python
 
        frequencies = {'a': 2, 'b': 1, 'c': 1}
-       rst = RandomSystematicPartitioning(2, random.Random())
-       rst.add_items(frequencies.keys(), lambda x: frequencies[x])
-       print(rst.partition())
+       rsp = RandomSystematicPartitioning(2, random.Random())
+       rsp.add_items(frequencies.keys(), lambda x: frequencies[x])
+       print(rsp.partition())
 
     The interface of this class also allows the use of builder-like syntax because the `add_*` methods return the
     instance itself, for example:
 
     .. code-block:: python
 
-       rst = RandomSystematicPartitioning(2, random.Random())
-       rst.add_item('a', 2)
+       rsp = RandomSystematicPartitioning(2, random.Random())
+       rsp.add_item('a', 2)
           .add_item('b', 1)
           .add_item('c', 1)
-       print(rst.partition())
+       print(rsp.partition())
     """
 
     def __init__(self, k: int, rng: Random) -> None:
