@@ -137,6 +137,8 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
                     current_hyperedge.add(v)
                     hyperedge_list[h].remove(v)
                     hyperedge_list[h].add(source)
+                    break
+
         # Add the new hyperedges on the hyperedge list
         hyperedge_list.append(next(new_hyperedges))
         hyperedge_list.append(next(new_hyperedges))
