@@ -4,12 +4,12 @@ Implementations of the SE-A, SE-B and SE-C graph generators and some auxiliary u
 from __future__ import annotations
 
 import itertools
-import typing
 from random import Random
+from typing import Iterator, Iterable, Callable, TypeVar
 
 import networkx as nx
 
-T = typing.TypeVar('T')
+T = TypeVar('T')
 
 
 def se_a(n: int, rng: Random) -> nx.Graph:
@@ -105,7 +105,7 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
         # convenience.
         hyperedge_x: set[object] = {source}
         hyperedge_y: set[object] = {source}
-        new_hyperedges: typing.Iterator[set[object]] = itertools.cycle([hyperedge_x, hyperedge_y])
+        new_hyperedges: Iterator[set[object]] = itertools.cycle([hyperedge_x, hyperedge_y])
         # Select a random hyperedge and add its elements into the new hyperedges using a random split. At the same time
         # add the new edges in the graph.
         for v in shuffled(rng.choice(hyperedge_list), rng):
@@ -200,7 +200,7 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
             for v in hyperedge_list[i]:
                 rsp.add_item(v, 1)
         # Run the partitioning in the RSP
-        rsp_iter: typing.Iterator[set[object]] = iter(rsp.partition())
+        rsp_iter: Iterator[set[object]] = iter(rsp.partition())
         # Replace m-2 rows of the RSP into the random m-2 old hyperedges previously selected and insert the other 2
         for i in random_old_hyperedges:
             hyperedge_list[i] = next(rsp_iter)
@@ -213,7 +213,7 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
     return g
 
 
-def shuffled(a: typing.Iterable[T], rng: Random) -> typing.Iterator[T]:
+def shuffled(a: Iterable[T], rng: Random) -> Iterator[T]:
     """
     Returns a generator that iterates through the values of the input iterable in random order.
 
@@ -236,7 +236,7 @@ def shuffled(a: typing.Iterable[T], rng: Random) -> typing.Iterator[T]:
     yield a[-1]
 
 
-def random_selections(n: int, k: int, rng: Random) -> typing.Iterator[int]:
+def random_selections(n: int, k: int, rng: Random) -> Iterator[int]:
     """
     Performs an unweighted selection without replacement of :math:`k` elements from a population of :math:`n` elements.
 
@@ -391,8 +391,8 @@ class RandomSystematicPartitioning:
             self.__items[-1], self.__items[random_index] = self.__items[random_index], self.__items[-1]
         return self
 
-    def add_items(self, items: typing.Iterable[object],
-                  mapping: typing.Callable[[object], int]) -> RandomSystematicPartitioning:
+    def add_items(self, items: Iterable[object],
+                  mapping: Callable[[object], int]) -> RandomSystematicPartitioning:
         """
         Adds a collection of items along with their frequencies into the instance.
 
@@ -445,7 +445,7 @@ class RandomSystematicPartitioning:
         groups: list[set[object]] = []
         for i in range(self.__n // self.__k):
             groups.append(set())
-        group_iterator: typing.Iterator[set[object]] = itertools.cycle(groups)
+        group_iterator: Iterator[set[object]] = itertools.cycle(groups)
         for x in self.__items:
             for j in range(self.__frequencies[x]):
                 next_group: set[object] = next(group_iterator)
