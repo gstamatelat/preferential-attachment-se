@@ -349,7 +349,7 @@ class RandomSystematicPartitioning:
 
         :param int k: The size of each group.
         :param Random rng: The random number generator.
-        :raises ValueError: If `k < 1`.
+        :raises ValueError: If :math:`k < 1`.
         """
 
         if k < 1:
