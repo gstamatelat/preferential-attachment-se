@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import itertools
 from random import Random
-from typing import Iterator, Iterable, Callable, TypeVar
+from typing import Iterator, Iterable, Callable, TypeVar, Union
 
 import networkx as nx
 
@@ -203,8 +203,7 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
         # Randomly select m-2 old hyperedges and add them into the RSP
         random_old_hyperedges: list[int] = list(random_selections(len(hyperedge_list), m - 2, rng))
         for i in random_old_hyperedges:
-            for v in hyperedge_list[i]:
-                rsp.add_item(v, 1)
+            rsp.add_iterator(hyperedge_list[i])
         # Run the partitioning in the RSP
         rsp_iter: Iterator[set[object]] = iter(rsp.partition())
         # Replace m-2 rows of the RSP into the random m-2 old hyperedges previously selected and insert the other 2
@@ -463,7 +462,7 @@ class RandomSystematicPartitioning:
             self.add_item(v, mapping(v))
         return self
 
-    def add_iterator(self, items: Iterator[object]) -> RandomSystematicPartitioning:
+    def add_iterator(self, items: Union[Iterator[object], Iterable[object]]) -> RandomSystematicPartitioning:
         """
         Add a stream of items into the instance.
 
@@ -477,7 +476,7 @@ class RandomSystematicPartitioning:
 
         See also the :meth:`add_item` and :meth:`add_items` methods.
 
-        :param Iterator[object] items: An iterator of the items to insert into the instance.
+        :param Union[Iterator[object], Iterable[object]] items: An iterator of the items to insert into the instance.
         :return: The instance itself (self).
         :rtype: RandomSystematicPartitioning
         """
