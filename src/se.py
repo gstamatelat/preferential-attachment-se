@@ -194,8 +194,10 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
             raise ValueError(f"The initial graph contains node {source} already")
         # Start the random systematic partitioning
         rsp: RandomSystematicPartitioning = RandomSystematicPartitioning(m, rng)
-        # Select one random old hyperedge and insert its elements into the RSP. At the same time create the edges too.
-        for v in shuffled(rng.choice(hyperedge_list), rng):
+        # Select one random old hyperedge.
+        random_hyperedge: set[object] = rng.choice(hyperedge_list)
+        # Insert its elements into the RSP. At the same time create the edges too.
+        for v in shuffled(random_hyperedge, rng):
             rsp.add_item(v, 1)
             g.add_edge(source, v)
         # Insert m copies of source into the RSP
