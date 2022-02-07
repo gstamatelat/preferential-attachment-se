@@ -53,7 +53,7 @@ def se_a(n: int, rng: Random) -> nx.Graph:
 
 
 def se_b(n: int, m: int, rng: Random, mu: int, initial_graph: nx.Graph = None) -> nx.Graph:
-    """
+    r"""
     Returns a random graph using the SE-B preferential attachment algorithm.
 
     This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
@@ -144,7 +144,7 @@ def se_b(n: int, m: int, rng: Random, mu: int, initial_graph: nx.Graph = None) -
 
 
 def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
-    """
+    r"""
     Returns a random graph using the SE-C preferential attachment algorithm.
 
     This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
@@ -243,7 +243,7 @@ def shuffled(a: Iterable[T], rng: Random) -> Iterator[T]:
 
 
 def random_selections(n: int, k: int, rng: Random) -> Iterator[int]:
-    """
+    r"""
     Performs an unweighted selection without replacement of :math:`k` elements from a population of :math:`n` elements.
 
     The population and the sample are represented by their indices and, as a result, this method will return
@@ -289,7 +289,7 @@ def random_selections(n: int, k: int, rng: Random) -> Iterator[int]:
 
 
 def random_choices(n: int, k: int, rng: Random) -> Iterator[int]:
-    """
+    r"""
     Performs an unweighted selection with replacement of :math:`k` elements from a population of :math:`n` elements.
 
     The population and the sample are represented by their indices and, as a result, this method will return
