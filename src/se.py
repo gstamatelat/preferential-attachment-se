@@ -3,6 +3,7 @@ Implementations of the SE-A, SE-B and SE-C graph generators and some auxiliary u
 """
 from __future__ import annotations
 
+import itertools
 import typing
 from random import Random
 
@@ -103,7 +104,7 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
         # convenience.
         hyperedge_x: set[object] = {source}
         hyperedge_y: set[object] = {source}
-        new_hyperedges: typing.Iterator[set[object]] = rotating_iterator([hyperedge_x, hyperedge_y])
+        new_hyperedges: typing.Iterator[set[object]] = itertools.cycle([hyperedge_x, hyperedge_y])
         # Select a random hyperedge and add its elements into the new hyperedges using a random split. At the same time
         # add the new edges in the graph.
         for v in shuffled(rng.choice(hyperedge_list), rng):
@@ -208,31 +209,6 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
 
     # Return the graph and we're done
     return g
-
-
-def rotating_iterator(a: typing.Iterable[T]) -> typing.Iterator[T]:
-    """
-    Returns a rotating iterator over the elements of the iterable `a`.
-
-    A rotating iterator traverses the elements of `a` once and then starts over. The rotating iterator is infinite and
-    never stops. For example the snippet
-
-    .. code-block:: python
-
-       ri: Iterator[int] = rotating_iterator([1, 2])
-       for i in range(10):
-           print(next(ri))
-
-    will alternate between the values 1 and 2 for 5 times before terminating.
-
-    :param Iterable[T] a: The input iterable.
-    :return: A rotating iterator over the elements of `a`.
-    :rtype: Iterator[T]
-    """
-
-    while True:
-        for e in a:
-            yield e
 
 
 def shuffled(a: typing.Iterable[T], rng: Random) -> typing.Iterator[T]:
