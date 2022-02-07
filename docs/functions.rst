@@ -9,6 +9,11 @@ random_selections
 
 .. autofunction:: se.random_selections
 
+random_choices
+~~~~~~~~~~~~~~
+
+.. autofunction:: se.random_choices
+
 shuffled
 ~~~~~~~~
 

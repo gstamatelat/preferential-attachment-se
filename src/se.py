@@ -52,7 +52,7 @@ def se_a(n: int, rng: Random) -> nx.Graph:
     return g
 
 
-def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+def se_b(n: int, m: int, rng: Random, mu: int, initial_graph: nx.Graph = None) -> nx.Graph:
     """
     Returns a random graph using the SE-B preferential attachment algorithm.
 
@@ -61,12 +61,13 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
     :param int n: Number of nodes of the final graph.
     :param int m: Number of edges to attach from a new node to existing nodes.
     :param Random rng: Random number generator.
+    :param int mu: An integer denoting the number of hyperedges that are shuffled before selecting
     :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
         loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
         degree higher than :math:`2|E_0|/m`. It should be connected, although this is not enforced. The initial graph
         will be copied before being used. This argument is optional and if `None` is given then the process starts from
         a complete graph of :math:`m` nodes and :math:`m(m-1)` edges.
-    :raises ValueError: If :math:`n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the
+    :raises ValueError: If :math:`n \ge |V_0| \ge m \ge 2` is not satisfied or if the conditions required for the
         `initial_graph` are not fulfilled, namely the divisibility :math:`2|E_0|/m` and the maximum degree of
         :math:`2|E_0|/m`.
     :return: The resulting graph.
@@ -86,6 +87,9 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
             f"Condition n >= |V_0| >= m >= 2 is not met, got n = {n}, m = {m}, |V_0| = {len(initial_graph)}"
         )
 
+    if not mu >= 1:
+        raise ValueError(f"mu must be strictly positive, got mu = {mu}")
+
     # Create the initial hyperedge list
     hyperedge_list: list[set[object]] = RandomSystematicPartitioning(m, rng) \
         .add_items(initial_graph.nodes, lambda x: initial_graph.degree[x]) \
@@ -101,14 +105,16 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
         # vertex labels, for example contains integer labels greater than the size of the initial graph.
         if g.has_node(source):
             raise ValueError(f"The initial graph contains node {source} already")
-        # Create two new hyperedges and add the source on both. Here we also create an alternating iterator for
-        # convenience.
+        # Create two new hyperedges and add the source on both.
+        # Here we also create an alternating iterator for convenience.
         hyperedge_x: set[object] = {source}
         hyperedge_y: set[object] = {source}
         new_hyperedges: Iterator[set[object]] = itertools.cycle([hyperedge_x, hyperedge_y])
-        # Select a random hyperedge and add its elements into the new hyperedges using a random split. At the same time
-        # add the new edges in the graph.
-        for v in shuffled(rng.choice(hyperedge_list), rng):
+        # Select a random hyperedge.
+        random_hyperedge: set[object] = rng.choice(hyperedge_list)
+        # Add its elements into the new hyperedges using a random split.
+        # At the same time add the new edges in the graph.
+        for v in shuffled(random_hyperedge, rng):
             next(new_hyperedges).add(v)
             g.add_edge(source, v)
         # Select m-2 hyperedges so we can swap the m-2 values of source that are remaining. One of these m-2 hyperedges
@@ -151,7 +157,7 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
         degree higher than :math:`2|E_0|/m`. It should be connected, although this is not enforced. The initial graph
         will be copied before being used. This argument is optional and if `None` is given then the process starts from
         a complete graph of :math:`m` nodes and :math:`m(m-1)` edges.
-    :raises ValueError: If :math:`n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the
+    :raises ValueError: If :math:`n \ge |V_0| \ge m \ge 2` is not satisfied or if the conditions required for the
         `initial_graph` are not fulfilled, namely the divisibility :math:`2|E_0|/m` and the maximum degree of
         :math:`2|E_0|/m`.
     :return: The resulting graph.
@@ -262,7 +268,7 @@ def random_selections(n: int, k: int, rng: Random) -> Iterator[int]:
     :param int n: The size of the population.
     :param int k: The size of the sample.
     :param Random rng: The random number generator to use.
-    :raises ValueError: If the condition :math:`n >= k >= 0` is not satisfied.
+    :raises ValueError: If the condition :math:`n \ge k \ge 0` is not satisfied.
     :return: A generator that holds the values of :math:`k` random and discrete integers in the range :math:`[0,n)`.
     :rtype: Iterator[int]
     """
@@ -280,6 +286,43 @@ def random_selections(n: int, k: int, rng: Random) -> Iterator[int]:
         next_index: int = rng.randrange(0, n - i)
         yield swaps.get(next_index, next_index)
         swaps[next_index] = swaps.get(n - i - 1, n - i - 1)
+
+
+def random_choices(n: int, k: int, rng: Random) -> Iterator[int]:
+    """
+    Performs an unweighted selection with replacement of :math:`k` elements from a population of :math:`n` elements.
+
+    The population and the sample are represented by their indices and, as a result, this method will return
+    :math:`k` random (but not necessarily discrete) indices in the range :math:`[0,n)`. The selection is performed
+    by repeated independent random selections from that range. The elements are returned in no particular order. This
+    method is similar in operation with :func:`random.choices` but returns the choices as an iterator that is lazily
+    populated instead of a concrete collection.
+
+    If you need to reuse the result of this operation you need to store it in a collection. A :class:`list` must be used
+    in this case as the elements returned might not be unique:
+
+    .. code-block:: python
+
+       random_numbers = list(random_choices(10, 3, Random()))
+
+    This method returns a generator that will be fully consumed in time proportional to :math:`k` in the worst case and
+    does not consume additional memory.
+
+    :param int n: The size of the population.
+    :param int k: The size of the sample.
+    :param Random rng: The random number generator to use.
+    :raises ValueError: If the conditions :math:`n \ge 0` and :math:`k \ge 0` are not satisfied.
+    :return: A generator that holds the values of :math:`k` random and discrete integers in the range :math:`[0,n)`.
+    :rtype: Iterator[int]
+    """
+
+    # Conditions for the arguments
+    if not (n >= 0 and k >= 0):
+        raise ValueError(f"The conditions n >= 0 and k >= 0 are not both satisfied, got n = {n}, k = {k}")
+
+    # Iterator
+    for _ in range(k):
+        yield rng.randrange(0, n)
 
 
 class RandomSystematicPartitioning:
@@ -453,3 +496,7 @@ class RandomSystematicPartitioning:
                     raise ValueError(f"Element {x} was found too many times: {self.__frequencies[x]}")
                 next_group.add(x)
         return groups
+
+    def sample(self) -> set[object]:
+        partitions: list[set[object]] = self.partition()
+        return self.__rng.choice(partitions)
