@@ -9,11 +9,6 @@ random_selections
 
 .. autofunction:: se.random_selections
 
-rotating_iterator
-~~~~~~~~~~~~~~~~~
-
-.. autofunction:: se.rotating_iterator
-
 shuffled
 ~~~~~~~~
 
