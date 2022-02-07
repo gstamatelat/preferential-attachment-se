@@ -17,14 +17,9 @@ def se_a(n: int, rng: Random) -> nx.Graph:
 
     This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
 
-    :param n: Number of nodes of the final graph.
-    :type n: int
-
-    :param rng: Random number generator.
-    :type rng: Random
-
+    :param int n: Number of nodes of the final graph.
+    :param Random rng: Random number generator.
     :raises ValueError: If `n` is less than 2.
-
     :return: The resulting graph.
     :rtype: Graph
     """
@@ -62,25 +57,16 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
 
     This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
 
-    :param n: Number of nodes of the final graph.
-    :type n: int
-
-    :param m: Number of edges to attach from a new node to existing nodes.
-    :type m: int
-
-    :param rng: Random number generator.
-    :type rng: Random
-
-    :param initial_graph: Initial network for the algorithm. It must be an undirected graph without self loops of
-        multiple edges. The initial graph must satisfy the divisibility `2|E_0|/m` and no vertex can have degree higher
-        than `2|E_0|/m`. It should be connected, although this is not enforced. The initial graph will be copied before
-        being used. This argument is optional and if `None` is given then the process starts from a complete graph of
-        `m` nodes and `m(m-1)` edges.
-    :type initial_graph: Graph, optional
-
+    :param int n: Number of nodes of the final graph.
+    :param int m: Number of edges to attach from a new node to existing nodes.
+    :param Random rng: Random number generator.
+    :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
+        loops of multiple edges. The initial graph must satisfy the divisibility `2|E_0|/m` and no vertex can have
+        degree higher than `2|E_0|/m`. It should be connected, although this is not enforced. The initial graph will be
+        copied before being used. This argument is optional and if `None` is given then the process starts from a
+        complete graph of `m` nodes and `m(m-1)` edges.
     :raises ValueError: If `n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the `initial_graph`
         are not fulfilled, namely the divisibility `2|E_0|/m` and the maximum degree of `2|E_0|/m`.
-
     :return: The resulting graph.
     :rtype: Graph
     """
@@ -155,25 +141,16 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
 
     This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
 
-    :param n: Number of nodes of the final graph.
-    :type n: int
-
-    :param m: Number of edges to attach from a new node to existing nodes.
-    :type m: int
-
-    :param rng: Random number generator.
-    :type rng: Random
-
-    :param initial_graph: Initial network for the algorithm. It must be an undirected graph without self loops of
+    :param int n: Number of nodes of the final graph.
+    :param int m: Number of edges to attach from a new node to existing nodes.
+    :param Random rng: Random number generator.
+    :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self loops of
         multiple edges. The initial graph must satisfy the divisibility `2|E_0|/m` and no vertex can have degree higher
         than `2|E_0|/m`. It should be connected, although this is not enforced. The initial graph will be copied before
         being used. This argument is optional and if `None` is given then the process starts from a complete graph of
         `m` nodes and `m(m-1)` edges.
-    :type initial_graph: Graph, optional
-
     :raises ValueError: If `n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the `initial_graph`
         are not fulfilled, namely the divisibility `2|E_0|/m` and the maximum degree of `2|E_0|/m`.
-
     :return: The resulting graph.
     :rtype: Graph
     """
@@ -248,9 +225,7 @@ def rotating_iterator(a: typing.Iterable[T]) -> typing.Iterator[T]:
 
     will alternate between the values 1 and 2 for 5 times before terminating.
 
-    :param a: The input iterable.
-    :type a: Iterable[T]
-
+    :param Iterable[T] a: The input iterable.
     :return: A rotating iterator over the elements of `a`.
     :rtype: Iterator[T]
     """
@@ -269,12 +244,8 @@ def shuffled(a: typing.Iterable[T], rng: Random) -> typing.Iterator[T]:
     example you wish to perform a one-pass operation on them, for example you are using it as intermediate storage. In
     other cases, it probably won't be any good in terms of performance.
 
-    :param a: The input iterable.
-    :type a: Iterable[object]
-
-    :param rng: The random number generator.
-    :type rng: Random
-
+    :param Iterable[object] a: The input iterable.
+    :param Random rng: The random number generator.
     :return: A generator for the values of the input collection in random order.
     :rtype: Iterator[object]
     """
@@ -309,17 +280,10 @@ def random_selections(n: int, k: int, rng: Random) -> typing.Iterator[int]:
     prone to rejections due to the selection of duplicate elements. The generator uses memory proportional to `k` in the
     worst case.
 
-    :param n: The size of the population.
-    :type n: int
-
-    :param k: The size of the sample.
-    :type k: int
-
-    :param rng: The random number generator to use.
-    :type rng: Random
-
+    :param int n: The size of the population.
+    :param int k: The size of the sample.
+    :param Random rng: The random number generator to use.
     :raises ValueError: If the condition `n >= k >= 0` is not satisfied.
-
     :return: A generator that holds the values of `k` random and discrete integers in the range `[0,n)`.
     :rtype: Iterator[int]
     """
@@ -400,16 +364,12 @@ class RandomSystematicPartitioning:
 
     def __init__(self, k: int, rng: Random) -> None:
         """
-        Construct an instance of this class with a group size `k` and a random number generator `rng`.
+        The constructor initializes the instance with a group size `k` and a random number generator `rng`.
 
         The constructor runs in constant time.
 
-        :param k: The size of each group.
-        :type k: int
-
-        :param rng: The random number generator.
-        :type rng: Random
-
+        :param int k: The size of each group.
+        :param Random rng: The random number generator.
         :raises ValueError: If `k < 1`.
         """
 
@@ -433,14 +393,9 @@ class RandomSystematicPartitioning:
 
         Also see the :meth:`add_items` method.
 
-        :param item: The item to insert.
-        :type item: object
-
-        :param frequency: The frequency of the item.
-        :type frequency: int
-
+        :param object item: The item to insert.
+        :param int frequency: The frequency of the item.
         :raises ValueError: If `frequency < 1`.
-
         :return: The instance itself (self).
         :type: RandomSystematicPartitioning
         """
@@ -475,14 +430,9 @@ class RandomSystematicPartitioning:
 
         Also see the :meth:`add_items` method.
 
-        :param items: An iterable of the items to insert into the instance.
-        :type items: Iterable[object]
-
-        :param mapping: A function that accepts an object and returns its frequency.
-        :type mapping: Callable[[object], int]
-
+        :param Iterable[object] items: An iterable of the items to insert into the instance.
+        :param Callable[[object], int] mapping: A function that accepts an object and returns its frequency.
         :raises ValueError: If any frequency returned by `mapping` is less than 1.
-
         :return: The instance itself (self).
         :type: RandomSystematicPartitioning
         """
@@ -507,7 +457,6 @@ class RandomSystematicPartitioning:
         inside the data structure.
 
         :raises ValueError: If the conditions specified (the divisibility and the max frequency) are not fulfilled.
-
         :return: The partition held in this instance.
         :rtype: list[set[object]]
         """
