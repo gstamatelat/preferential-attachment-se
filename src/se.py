@@ -62,12 +62,13 @@ def se_b(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
     :param int m: Number of edges to attach from a new node to existing nodes.
     :param Random rng: Random number generator.
     :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
-        loops of multiple edges. The initial graph must satisfy the divisibility `2|E_0|/m` and no vertex can have
-        degree higher than `2|E_0|/m`. It should be connected, although this is not enforced. The initial graph will be
-        copied before being used. This argument is optional and if `None` is given then the process starts from a
-        complete graph of `m` nodes and `m(m-1)` edges.
-    :raises ValueError: If `n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the `initial_graph`
-        are not fulfilled, namely the divisibility `2|E_0|/m` and the maximum degree of `2|E_0|/m`.
+        loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
+        degree higher than :math:`2|E_0|/m`. It should be connected, although this is not enforced. The initial graph
+        will be copied before being used. This argument is optional and if `None` is given then the process starts from
+        a complete graph of :math:`m` nodes and :math:`m(m-1)` edges.
+    :raises ValueError: If :math:`n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the
+        `initial_graph` are not fulfilled, namely the divisibility :math:`2|E_0|/m` and the maximum degree of
+        :math:`2|E_0|/m`.
     :return: The resulting graph.
     :rtype: Graph
     """
@@ -145,13 +146,14 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
     :param int n: Number of nodes of the final graph.
     :param int m: Number of edges to attach from a new node to existing nodes.
     :param Random rng: Random number generator.
-    :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self loops of
-        multiple edges. The initial graph must satisfy the divisibility `2|E_0|/m` and no vertex can have degree higher
-        than `2|E_0|/m`. It should be connected, although this is not enforced. The initial graph will be copied before
-        being used. This argument is optional and if `None` is given then the process starts from a complete graph of
-        `m` nodes and `m(m-1)` edges.
-    :raises ValueError: If `n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the `initial_graph`
-        are not fulfilled, namely the divisibility `2|E_0|/m` and the maximum degree of `2|E_0|/m`.
+    :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
+        loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
+        degree higher than :math:`2|E_0|/m`. It should be connected, although this is not enforced. The initial graph
+        will be copied before being used. This argument is optional and if `None` is given then the process starts from
+        a complete graph of :math:`m` nodes and :math:`m(m-1)` edges.
+    :raises ValueError: If :math:`n >= |V_0| >= m >= 2` is not satisfied or if the conditions required for the
+        `initial_graph` are not fulfilled, namely the divisibility :math:`2|E_0|/m` and the maximum degree of
+        :math:`2|E_0|/m`.
     :return: The resulting graph.
     :rtype: Graph
     """
@@ -236,13 +238,14 @@ def shuffled(a: typing.Iterable[T], rng: Random) -> typing.Iterator[T]:
 
 def random_selections(n: int, k: int, rng: Random) -> typing.Iterator[int]:
     """
-    Performs an unweighted selection without replacement of `k` elements from a population of `n` elements.
+    Performs an unweighted selection without replacement of :math:`k` elements from a population of :math:`n` elements.
 
     The population and the sample are represented by their indices and, as a result, this method will return
-    `k` random and discrete indices in the range `[0,n)`. The selection is performed in such a way that the higher order
-    inclusion probabilities of all `k`-tuples are equal. In practice, this means that if `k = 2`, all pairs of numbers
-    are equally likely to appear as the result of this method. The operation of this algorithm is based on a virtual
-    shuffling of the array `[0,n)` where the first `k` elements are then being returned efficiently.
+    :math:`k` random and discrete indices in the range :math:`[0,n)`. The selection is performed in such a way that the
+    higher order inclusion probabilities of all :math:`k`-tuples are equal. In practice, this means that if
+    :math:`k = 2`, all pairs of numbers are equally likely to appear as the result of this method. The operation of this
+    algorithm is based on a virtual shuffling of the array :math:`[0,n)` where the first :math:`k` elements are then
+    being returned efficiently.
 
     If you need to reuse the result of this operation you need to store it in a collection. A :class:`set` would be a
     convenient container as the elements returned are unique and don't have any particular order at which they are
@@ -252,15 +255,15 @@ def random_selections(n: int, k: int, rng: Random) -> typing.Iterator[int]:
 
        random_numbers = set(random_selections(10, 3, Random()))
 
-    This method returns a generator that will be fully consumed in time proportional to `k` in the worst case and is not
-    prone to rejections due to the selection of duplicate elements. The generator uses memory proportional to `k` in the
-    worst case.
+    This method returns a generator that will be fully consumed in time proportional to :math:`k` in the worst case and
+    is not prone to rejections due to the selection of duplicate elements. The generator uses memory proportional to
+    :math:`k` in the worst case.
 
     :param int n: The size of the population.
     :param int k: The size of the sample.
     :param Random rng: The random number generator to use.
-    :raises ValueError: If the condition `n >= k >= 0` is not satisfied.
-    :return: A generator that holds the values of `k` random and discrete integers in the range `[0,n)`.
+    :raises ValueError: If the condition :math:`n >= k >= 0` is not satisfied.
+    :return: A generator that holds the values of :math:`k` random and discrete integers in the range :math:`[0,n)`.
     :rtype: Iterator[int]
     """
 
@@ -283,11 +286,11 @@ class RandomSystematicPartitioning:
     """
     Implementation of the random systematic partitioning scheme.
 
-    Random systematic partitioning (RSP) randomly partitions the input collection into groups of `k` elements such that
-    each group contains only unique elements. The number of groups itself is implicitly defined by the ratio of the sum
-    of frequencies over `k`. The algorithm implemented in this class is heavily influenced by the systematic random
-    sampling design. If the elements cannot be partitioned in such a way, then :class:`ValueError` is raised from the
-    :meth:`~se.RandomSystematicPartitioning.partition` method.
+    Random systematic partitioning (RSP) randomly partitions the input collection into groups of :math:`k` elements such
+    that each group contains only unique elements. The number of groups itself is implicitly defined by the ratio of the
+    sum of frequencies over :math:`k`. The algorithm implemented in this class is heavily influenced by the systematic
+    random sampling design. If the elements cannot be partitioned in such a way, then :class:`ValueError` is raised from
+    the :meth:`~se.RandomSystematicPartitioning.partition` method.
 
     The interface allows you to add elements into the RSP using the methods
     :meth:`~se.RandomSystematicPartitioning.add_item` and :meth:`~se.RandomSystematicPartitioning.add_items` and then it
@@ -421,16 +424,16 @@ class RandomSystematicPartitioning:
         """
         Returns the partition held by this instance.
 
-        More formally, this method returns a list of sets of elements, where each set contains `k` unique elements. This
-        method will raise :class:`ValueError` if the elements inserted up until the point that this method is called
-        cannot be partitioned in such a way that both these conditions are met:
+        More formally, this method returns a list of sets of elements, where each set contains :math:`k` unique
+        elements. This method will raise :class:`ValueError` if the elements inserted up until the point that this
+        method is called cannot be partitioned in such a way that both these conditions are met:
 
-        #. The sum of the frequencies of all unique elements `n` is divisible by `k`.
-        #. No element has frequency larger than `n/k`.
+        #. The sum of the frequencies of all unique elements :math:`n` is divisible by :math:`k`.
+        #. No element has frequency larger than :math:`n/k`.
 
         This method is deterministic and will always return the same result when executed consecutively without any
-        insertion in-between. It always runs in time proportional to `n` regardless of the properties of the elements
-        inside the data structure.
+        insertion in-between. It always runs in time proportional to :math:`n` regardless of the properties of the
+        elements inside the data structure.
 
         :raises ValueError: If the conditions specified (the divisibility and the max frequency) are not fulfilled.
         :return: The partition held in this instance.
@@ -442,7 +445,7 @@ class RandomSystematicPartitioning:
         groups: list[set[object]] = []
         for i in range(self.__n // self.__k):
             groups.append(set())
-        group_iterator: typing.Iterator[set[object]] = rotating_iterator(groups)
+        group_iterator: typing.Iterator[set[object]] = itertools.cycle(groups)
         for x in self.__items:
             for j in range(self.__frequencies[x]):
                 next_group: set[object] = next(group_iterator)
