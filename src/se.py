@@ -413,13 +413,13 @@ class RandomSystematicPartitioning:
         elements are inserted into a :class:`dict`, and as a result the equality is performed using the `__hash__`
         and `__eq__` combination.
 
-        Also see the :meth:`add_items` method.
+        Also see the :meth:`add_items` and :meth:`add_iterator` methods.
 
         :param object item: The item to insert.
         :param int frequency: The frequency of the item.
         :raises ValueError: If `frequency < 1`.
         :return: The instance itself (self).
-        :type: RandomSystematicPartitioning
+        :rtype: RandomSystematicPartitioning
         """
 
         if frequency < 1:
@@ -448,19 +448,42 @@ class RandomSystematicPartitioning:
            return self
 
         The elements in `items` should be unique, otherwise non-unique values will be inserted as many times as the sum
-        of their frequencies.
+        of their frequencies. Sometimes this situation is desirable.
 
-        Also see the :meth:`add_items` method.
+        Also see the :meth:`add_items` and :meth:`add_iterator` methods.
 
         :param Iterable[object] items: An iterable of the items to insert into the instance.
         :param Callable[[object], int] mapping: A function that accepts an object and returns its frequency.
         :raises ValueError: If any frequency returned by `mapping` is less than 1.
         :return: The instance itself (self).
-        :type: RandomSystematicPartitioning
+        :rtype: RandomSystematicPartitioning
         """
 
         for v in items:
             self.add_item(v, mapping(v))
+        return self
+
+    def add_iterator(self, items: Iterator[object]) -> RandomSystematicPartitioning:
+        """
+        Add a stream of items into the instance.
+
+        This method is equivalent to:
+
+        .. code-block:: python
+
+           for v in items:
+               self.add_item(v, 1)
+           return self
+
+        See also the :meth:`add_item` and :meth:`add_items` methods.
+
+        :param Iterator[object] items: An iterator of the items to insert into the instance.
+        :return: The instance itself (self).
+        :rtype: RandomSystematicPartitioning
+        """
+
+        for v in items:
+            self.add_item(v, 1)
         return self
 
     def partition(self) -> list[set[object]]:
