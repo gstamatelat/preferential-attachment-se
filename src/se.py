@@ -178,6 +178,9 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
             f"Condition n >= |V_0| >= m >= 2 is not met, got n = {n}, m = {m}, |V_0| = {len(initial_graph)}"
         )
 
+    if not mu >= 1:
+        raise ValueError(f"mu must be strictly positive, got mu = {mu}")
+
     # Create the initial hyperedge list
     hyperedge_list: list[set[object]] = RandomSystematicPartitioning(m, rng) \
         .add_items(initial_graph.nodes, lambda x: initial_graph.degree[x]) \
