@@ -52,7 +52,7 @@ def se_a(n: int, rng: Random) -> nx.Graph:
     return g
 
 
-def se_b(n: int, m: int, rng: Random, mu: int, initial_graph: nx.Graph = None) -> nx.Graph:
+def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
     r"""
     Returns a random graph using the SE-B preferential attachment algorithm.
 
@@ -60,8 +60,8 @@ def se_b(n: int, m: int, rng: Random, mu: int, initial_graph: nx.Graph = None) -
 
     :param int n: Number of nodes of the final graph.
     :param int m: Number of edges to attach from a new node to existing nodes.
+    :param int mu: An integer denoting the number of hyperedges that are shuffled before selecting.
     :param Random rng: Random number generator.
-    :param int mu: An integer denoting the number of hyperedges that are shuffled before selecting
     :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
         loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
         degree higher than :math:`2|E_0|/m`. It should be connected, although this is not enforced. The initial graph
@@ -143,7 +143,7 @@ def se_b(n: int, m: int, rng: Random, mu: int, initial_graph: nx.Graph = None) -
     return g
 
 
-def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
     r"""
     Returns a random graph using the SE-C preferential attachment algorithm.
 
@@ -151,6 +151,7 @@ def se_c(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
 
     :param int n: Number of nodes of the final graph.
     :param int m: Number of edges to attach from a new node to existing nodes.
+    :param int mu: An integer denoting the number of hyperedges that are shuffled before selecting.
     :param Random rng: Random number generator.
     :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
         loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
