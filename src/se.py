@@ -1,6 +1,7 @@
 """
 Implementations of the SE-A, SE-B and SE-C graph generators and some auxiliary utilities.
 """
+
 from __future__ import annotations
 
 import itertools
@@ -24,7 +25,6 @@ def se_a(n: int, rng: Random) -> nx.Graph:
     :return: The resulting graph.
     :rtype: Graph
     """
-
     # Fail if n < 2
     if n < 2:
         raise ValueError(f"n must be greater or equal to 2, given n = {n}")
@@ -73,7 +73,6 @@ def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
     :return: The resulting graph.
     :rtype: Graph
     """
-
     if not m >= 2:
         raise ValueError(
             f"Condition m >= 2 is not met, got m = {m}"
@@ -167,7 +166,6 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
     :return: The resulting graph.
     :rtype: Graph
     """
-
     if not m >= 2:
         raise ValueError(
             f"Condition m >= 2 is not met, got m = {m}"
@@ -244,7 +242,6 @@ def shuffled(a: Iterable[T], rng: Random) -> Iterator[T]:
     :return: A generator for the values of the input collection in random order.
     :rtype: Iterator[object]
     """
-
     a: list[object] = list(a)
     for i in range(0, len(a) - 1):
         j: int = rng.randrange(i, len(a))
@@ -283,7 +280,6 @@ def random_selections(n: int, k: int, rng: Random) -> Iterator[int]:
     :return: A generator that holds the values of :math:`k` random and discrete integers in the range :math:`[0,n)`.
     :rtype: Iterator[int]
     """
-
     # Conditions for the arguments
     if not (n >= k >= 0):
         raise ValueError(f"The condition n >= k >= 0 is not satisfied, got n = {n}, k = {k}")
@@ -326,7 +322,6 @@ def random_choices(n: int, k: int, rng: Random) -> Iterator[int]:
     :return: A generator that holds the values of :math:`k` random and discrete integers in the range :math:`[0,n)`.
     :rtype: Iterator[int]
     """
-
     # Conditions for the arguments
     if not (n >= 0 and k >= 0):
         raise ValueError(f"The conditions n >= 0 and k >= 0 are not both satisfied, got n = {n}, k = {k}")
@@ -405,7 +400,6 @@ class RandomSystematicPartitioning:
         :param Random rng: The random number generator.
         :raises ValueError: If :math:`k < 1`.
         """
-
         if k < 1:
             raise ValueError("k cannot be less than 1")
 
@@ -432,7 +426,6 @@ class RandomSystematicPartitioning:
         :return: The instance itself (self).
         :rtype: RandomSystematicPartitioning
         """
-
         if frequency < 1:
             raise ValueError(f"frequency cannot be less than 1, got {frequency}")
         self.__n += frequency
@@ -469,7 +462,6 @@ class RandomSystematicPartitioning:
         :return: The instance itself (self).
         :rtype: RandomSystematicPartitioning
         """
-
         for v in items:
             self.add_item(v, mapping(v))
         return self
@@ -492,7 +484,6 @@ class RandomSystematicPartitioning:
         :return: The instance itself (self).
         :rtype: RandomSystematicPartitioning
         """
-
         for v in items:
             self.add_item(v, 1)
         return self
@@ -516,7 +507,6 @@ class RandomSystematicPartitioning:
         :return: The partition held in this instance.
         :rtype: list[set[object]]
         """
-
         if self.__n % self.__k != 0:
             raise ValueError("The number of elements acquired must be divisible by k")
         groups: list[set[object]] = []
