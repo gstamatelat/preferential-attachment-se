@@ -110,7 +110,6 @@ def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
         hyperedge_y: set[object] = {source}
         new_hyperedges: Iterator[set[object]] = itertools.cycle([hyperedge_x, hyperedge_y])
         # Select a random hyperedge.
-        # random_hyperedge: set[object] = rng.choice(hyperedge_list)
         random_hyperedge: set[object] = RandomSystematicPartitioning(m, rng).add_iterator(
             itertools.chain(*map(lambda x: hyperedge_list[x], random_choices(len(hyperedge_list), mu, rng)))
         ).sample()
@@ -200,7 +199,6 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
         # Start the random systematic partitioning
         rsp: RandomSystematicPartitioning = RandomSystematicPartitioning(m, rng)
         # Select one random old hyperedge.
-        # random_hyperedge: set[object] = rng.choice(hyperedge_list)
         random_hyperedge: set[object] = RandomSystematicPartitioning(m, rng).add_iterator(
             itertools.chain(*map(lambda x: hyperedge_list[x], random_choices(len(hyperedge_list), mu, rng)))
         ).sample()
@@ -260,7 +258,6 @@ def se_d(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Grap
         # Start the random systematic partitioning
         rsp: RandomSystematicPartitioning = RandomSystematicPartitioning(m, rng)
         # Select one random old hyperedge.
-        # random_hyperedge: set[object] = rng.choice(hyperedge_list)
         random_hyperedge: set[object] = RandomSystematicPartitioning(m, rng).add_iterator(
             itertools.chain(*hyperedge_list)
         ).sample()
