@@ -228,6 +228,66 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
     return g
 
 
+def se_d(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+    if not m >= 2:
+        raise ValueError(
+            f"Condition m >= 2 is not met, got m = {m}"
+        )
+
+    if initial_graph is None:
+        initial_graph = nx.complete_graph(m, nx.Graph)
+
+    if not n >= len(initial_graph) >= m >= 2:
+        raise ValueError(
+            f"Condition n >= |V_0| >= m >= 2 is not met, got n = {n}, m = {m}, |V_0| = {len(initial_graph)}"
+        )
+
+    # Create the initial hyperedge list
+    hyperedge_list: list[set[object]] = RandomSystematicPartitioning(m, rng) \
+        .add_items(initial_graph.nodes, lambda x: initial_graph.degree[x]) \
+        .partition()
+
+    # Initialize the graph
+    g = initial_graph.copy()
+
+    # Grow the graph until there are n vertices
+    source: int = len(g)
+    while source < n:
+        # Check if the source vertex is already in the graph. This happens when the initial graph has inconsistent
+        # vertex labels, for example contains integer labels greater than the size of the initial graph.
+        if g.has_node(source):
+            raise ValueError(f"The initial graph contains node {source} already")
+        # Start the random systematic partitioning
+        rsp: RandomSystematicPartitioning = RandomSystematicPartitioning(m, rng)
+        # Select one random old hyperedge.
+        # random_hyperedge: set[object] = rng.choice(hyperedge_list)
+        random_hyperedge: set[object] = RandomSystematicPartitioning(m, rng).add_iterator(
+            itertools.chain(*hyperedge_list)
+        ).sample()
+        # Insert its elements into the RSP. At the same time create the edges too.
+        for v in shuffled(random_hyperedge, rng):
+            rsp.add_item(v, 1)
+            g.add_edge(source, v)
+        # Insert m copies of source into the RSP
+        rsp.add_item(source, m)
+        # Randomly select m-2 old hyperedges and add them into the RSP
+        random_old_hyperedges: list[int] = list(random_selections(len(hyperedge_list), m - 2, rng))
+        for i in random_old_hyperedges:
+            rsp.add_iterator(hyperedge_list[i])
+        # Run the partitioning in the RSP
+        rsp_iter: Iterator[set[object]] = iter(rsp.partition())
+        # Replace m-2 rows of the RSP into the random m-2 old hyperedges previously selected and insert the other 2
+        for i in random_old_hyperedges:
+            hyperedge_list[i] = next(rsp_iter)
+        hyperedge_list.append(next(rsp_iter))
+        hyperedge_list.append(next(rsp_iter))
+        # Advance source
+        source += 1
+
+    # Return the graph and we're done
+    return g
+
+
 def shuffled(a: Iterable[T], rng: Random) -> Iterator[T]:
     """
     Returns a generator that iterates through the values of the input iterable in random order.
