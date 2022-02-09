@@ -545,6 +545,10 @@ class RandomSystematicPartitioning:
             self.add_item(v, 1)
         return self
 
+    def reshuffle(self) -> RandomSystematicPartitioning:
+        self.__rng.shuffle(self.__items)
+        return self
+
     def partition(self) -> list[set[object]]:
         """
         Returns the partition held by this instance.
@@ -557,8 +561,8 @@ class RandomSystematicPartitioning:
         #. No element has frequency larger than :math:`n/k`.
 
         This method is deterministic and will always return the same result when executed consecutively without any
-        insertion in-between. It always runs in time proportional to :math:`n` regardless of the properties of the
-        elements inside the data structure.
+        insertion or reshuffling in-between. It always runs in time proportional to :math:`n` regardless of the
+        properties of the elements inside the data structure.
 
         :raises ValueError: If the conditions specified (the divisibility and the max frequency) are not fulfilled.
         :return: The partition held in this instance.
