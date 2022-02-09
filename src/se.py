@@ -566,5 +566,18 @@ class RandomSystematicPartitioning:
         return groups
 
     def sample(self) -> set[object]:
-        partitions: list[set[object]] = self.partition()
-        return self.__rng.choice(partitions)
+        if self.__n % self.__k != 0:
+            raise ValueError("The number of elements acquired must be divisible by k")
+        sample: set[object] = set()
+        jump: int = self.__n // self.__k
+        current: int = self.__rng.randrange(0, jump)
+        item: object
+        cumulative_frequency: int = 0
+        for item in self.__items:
+            if self.__frequencies[item] > jump:
+                raise ValueError(f"Element {item} was found too many times: {self.__frequencies[item]}")
+            cumulative_frequency += self.__frequencies[item]
+            if cumulative_frequency > current:
+                sample.add(item)
+                current += jump
+        return sample
