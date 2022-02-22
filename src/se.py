@@ -373,20 +373,23 @@ def random_choices(n: int, k: int, rng: Random) -> Iterator[int]:
 
 class RandomSystematicPartitioning:
     """
-    Implementation of the random systematic partitioning scheme.
+    Implementation of the random systematic partitioning scheme and the random systematic sampling algorithm.
 
     Random systematic partitioning (RSP) randomly partitions the input collection into groups of :math:`k` elements such
     that each group contains only unique elements. The number of groups itself is implicitly defined by the ratio of the
-    sum of frequencies over :math:`k`. The algorithm implemented in this class is heavily influenced by the systematic
-    random sampling design. If the elements cannot be partitioned in such a way, then :class:`ValueError` is raised from
-    the :meth:`~se.RandomSystematicPartitioning.partition` method.
+    sum of frequencies over :math:`k`. If the elements cannot be partitioned in such a way, then :class:`ValueError` is
+    raised from the :meth:`~se.RandomSystematicPartitioning.partition` method.
+
+    The algorithm implemented in this class is heavily influenced by the random systematic sampling (RSS) design.
+    Because of the close association between the two schemes, this class also implements the RSS design via the
+    :meth:`~se.RandomSystematicPartitioning.sample` method.
 
     The interface allows you to add elements into the RSP using the methods
     :meth:`~se.RandomSystematicPartitioning.add_item` and :meth:`~se.RandomSystematicPartitioning.add_items` and then it
     is possible to use the method :meth:`~se.RandomSystematicPartitioning.partition` to do the actual partitioning. By
     itself the :meth:`~se.RandomSystematicPartitioning.partition` does not change the state of the instance.
 
-    Below is a typical use case that will partition 2 copies of the element 'a' and the elements 'b' and 'c' into groups
+    Below is a typical use case that will partition 2 copies of the element `a` and the elements `b` and `c` into groups
     of 2.
 
     .. code-block:: python
@@ -397,14 +400,30 @@ class RandomSystematicPartitioning:
        rsp.add_item('c', 1)
        print(rsp.partition())
 
-    Because the element 'a' exists twice in the input collection, the only possible partitioning is the two groups
-    (a, b) and (a, c). The actual order of the groups returned is not important as the elements are randomly shuffled
-    anyway. In fact, the probability of receiving any of the two partitions is 50%. Keep in mind that the
+    Because the element `a` exists twice in the input collection, the only possible partitioning is the two groups
+    (`a`, `b`) and (`a`, `c`). The actual order of the groups returned is not important as the elements are randomly
+    shuffled anyway. In fact, the probability of receiving any of the two partitions is 50%. Keep in mind that the
     :meth:`~se.RandomSystematicPartitioning.partition` method is deterministic and will return the same result on
     consecutive calls. The actual randomization (or shuffling) is performed online as elements enter the instance.
-    Statistically independent partitions (even of the same input data) must rely on different instances of this class
-    and not different invocations of the :meth:`~se.RandomSystematicPartitioning.partition` method. As a result, calling
-    :meth:`~se.RandomSystematicPartitioning.partition` is normally not required or needed.
+    Statistically independent partitions (even of the same input data) must rely on different instances of this class or
+    the use of the :meth:`~se.RandomSystematicPartitioning.reshuffle` method, and not different invocations of the
+    :meth:`~se.RandomSystematicPartitioning.partition` method.
+
+    Similarly, the implementation of the RSS design can be seen in the following example.
+
+    .. code-block:: python
+
+       rsp = RandomSystematicPartitioning(2, random.Random())
+       rsp.add_item('a', 2)
+       rsp.add_item('b', 1)
+       rsp.add_item('c', 1)
+       print(rsp.sample())
+
+    The fragment results in a sample of 2 discrete elements from the population `{a, b, c}` with the specified weights /
+    frequencies. The probability of receiving the sample (`a`, `b`) is 50% and the probability of the sample (`a`, `c`)
+    is also 50%. Calling the :meth:`~se.RandomSystematicPartitioning.sample` method consecutively can result in
+    different samples but there is no intermediate reshuffling of the elements involved unless the
+    :meth:`~se.RandomSystematicPartitioning.reshuffle` method is explicitly invoked.
 
     The :meth:`~se.RandomSystematicPartitioning.add_items` may be used to insert items into the RSP when the population
     is known and exists in a concrete collection and at the same time a mapping function exists that maps the elements
