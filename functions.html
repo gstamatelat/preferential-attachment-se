@@ -5,18 +5,18 @@
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Auxiliary classes" href="classes.html" /><link rel="prev" title="Algorithms" href="algorithms.html" />
 
-    <meta name="generator" content="sphinx-4.2.0, furo 2021.10.09"/>
-        <title>Auxiliary functions - se 1.0 documentation</title>
+    <meta name="generator" content="sphinx-4.4.0, furo 2022.02.14.1"/>
+        <title>Auxiliary functions - se 1.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=0254c309f5cadf746f1a613e7677379ac9c8cdcd" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=16fb25fabf47304eee183a5e9af80b1ba98259b1" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=a8f031f701c6af50c9919b48f173a5785af06fac" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=25ceb02ed1c46dc30f2321ff83e92799f69dfdb9" />
     
     
 
 
 <style>
   body {
-    --color-code-background: #f0f0f0;
+    --color-code-background: #f8f8f8;
   --color-code-foreground: black;
   
   }
@@ -41,17 +41,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   <symbol id="svg-toc" viewBox="0 0 24 24">
     <title>Contents</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" />
-      <line x1="4" y1="6" x2="20" y2="6" />
-      <line x1="10" y1="12" x2="20" y2="12" />
-      <line x1="6" y1="18" x2="20" y2="18" />
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
     </svg>
   </symbol>
   <symbol id="svg-menu" viewBox="0 0 24 24">
     <title>Menu</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
       <line x1="3" y1="12" x2="21" y2="12"></line>
       <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -60,14 +56,14 @@
   </symbol>
   <symbol id="svg-arrow-right" viewBox="0 0 24 24">
     <title>Expand</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
       <polyline points="9 18 15 12 9 6"></polyline>
     </svg>
   </symbol>
   <symbol id="svg-sun" viewBox="0 0 24 24">
     <title>Light mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
       <circle cx="12" cy="12" r="5"></circle>
       <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -82,7 +78,7 @@
   </symbol>
   <symbol id="svg-moon" viewBox="0 0 24 24">
     <title>Dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
@@ -90,7 +86,7 @@
   </symbol>
   <symbol id="svg-sun-half" viewBox="0 0 24 24">
     <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
       <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
       <circle cx="12" cy="12" r="9" />
@@ -123,7 +119,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">se 1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">se 1.0</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -168,6 +164,7 @@
 
 </div>
 </div>
+
       </div>
       
     </div>
@@ -175,8 +172,7 @@
   <div class="main">
     <div class="content">
       <div class="article-container">
-        <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+        <div class="content-icon-container"><div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -191,81 +187,93 @@
         </div>
         <article role="main">
           <section id="auxiliary-functions">
-<h1>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Permalink to this headline">¶</a></h1>
+<h1>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Permalink to this headline">#</a></h1>
 <p>List of auxiliary functions with public API that are related to the problem of random sampling or are helper utilities
 for general problems.</p>
 <section id="random-selections">
-<h2>random_selections<a class="headerlink" href="#random-selections" title="Permalink to this headline">¶</a></h2>
+<h2>random_selections<a class="headerlink" href="#random-selections" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="se.random_selections">
-<span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">random_selections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">random.Random</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#se.random_selections" title="Permalink to this definition">¶</a></dt>
-<dd><p>Performs an unweighted selection without replacement of <cite>k</cite> elements from a population of <cite>n</cite> elements.</p>
+<span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">random_selections</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/random.html#random.Random" title="(in Python v3.10)"><span class="pre">random.Random</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.10)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#se.random_selections" title="Permalink to this definition">#</a></dt>
+<dd><p>Performs an unweighted selection without replacement of <span class="math notranslate nohighlight">\(k\)</span> elements from a population of <span class="math notranslate nohighlight">\(n\)</span> elements.</p>
 <p>The population and the sample are represented by their indices and, as a result, this method will return
-<cite>k</cite> random and discrete indices in the range <cite>[0,n)</cite>. The selection is performed in such a way that the higher order
-inclusion probabilities of all <cite>k</cite>-tuples are equal. In practice, this means that if <cite>k = 2</cite>, all pairs of numbers
-are equally likely to appear as the result of this method. The operation of this algorithm is based on a virtual
-shuffling of the array <cite>[0,n)</cite> where the first <cite>k</cite> elements are then being returned efficiently.</p>
-<p>If you need to reuse the result of this operation you need to store it in a collection. A <code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code> would be a
+<span class="math notranslate nohighlight">\(k\)</span> random and discrete indices in the range <span class="math notranslate nohighlight">\([0,n)\)</span>. The selection is performed in such a way that the
+higher order inclusion probabilities of all <span class="math notranslate nohighlight">\(k\)</span>-tuples are equal. In practice, this means that if
+<span class="math notranslate nohighlight">\(k = 2\)</span>, all pairs of numbers are equally likely to appear as the result of this method. The operation of this
+algorithm is based on a virtual shuffling of the array <span class="math notranslate nohighlight">\([0,n)\)</span> where the first <span class="math notranslate nohighlight">\(k\)</span> elements are then
+being returned efficiently.</p>
+<p>If you need to reuse the result of this operation you need to store it in a collection. A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">set</span></code></a> would be a
 convenient container as the elements returned are unique and don’t have any particular order at which they are
 returned:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">random_numbers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">random_selections</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">Random</span><span class="p">()))</span>
 </pre></div>
 </div>
-<p>This method returns a generator that will be fully consumed in time proportional to <cite>k</cite> in the worst case and is not
-prone to rejections due to the selection of duplicate elements. The generator uses memory proportional to <cite>k</cite> in the
-worst case.</p>
+<p>This method returns a generator that will be fully consumed in time proportional to <span class="math notranslate nohighlight">\(k\)</span> in the worst case and
+is not prone to rejections due to the selection of duplicate elements. The generator uses memory proportional to
+<span class="math notranslate nohighlight">\(k\)</span> in the worst case.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>n</strong> (<em>int</em>) – The size of the population.</p></li>
-<li><p><strong>k</strong> (<em>int</em>) – The size of the sample.</p></li>
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The size of the population.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The size of the sample.</p></li>
 <li><p><strong>rng</strong> (<em>Random</em>) – The random number generator to use.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If the condition <cite>n &gt;= k &gt;= 0</cite> is not satisfied.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – If the condition <span class="math notranslate nohighlight">\(n \ge k \ge 0\)</span> is not satisfied.</p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A generator that holds the values of <cite>k</cite> random and discrete integers in the range <cite>[0,n)</cite>.</p>
+<dd class="field-odd"><p>A generator that holds the values of <span class="math notranslate nohighlight">\(k\)</span> random and discrete integers in the range <span class="math notranslate nohighlight">\([0,n)\)</span>.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>Iterator[int]</p>
+<dd class="field-even"><p>Iterator[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 </section>
-<section id="rotating-iterator">
-<h2>rotating_iterator<a class="headerlink" href="#rotating-iterator" title="Permalink to this headline">¶</a></h2>
+<section id="random-choices">
+<h2>random_choices<a class="headerlink" href="#random-choices" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="se.rotating_iterator">
-<span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">rotating_iterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">se.T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">se.T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#se.rotating_iterator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a rotating iterator over the elements of the iterable <cite>a</cite>.</p>
-<p>A rotating iterator traverses the elements of <cite>a</cite> once and then starts over. The rotating iterator is infinite and
-never stops. For example the snippet</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ri</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">rotating_iterator</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">ri</span><span class="p">))</span>
+<dt class="sig sig-object py" id="se.random_choices">
+<span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">random_choices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/random.html#random.Random" title="(in Python v3.10)"><span class="pre">random.Random</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.10)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#se.random_choices" title="Permalink to this definition">#</a></dt>
+<dd><p>Performs an unweighted selection with replacement of <span class="math notranslate nohighlight">\(k\)</span> elements from a population of <span class="math notranslate nohighlight">\(n\)</span> elements.</p>
+<p>The population and the sample are represented by their indices and, as a result, this method will return
+<span class="math notranslate nohighlight">\(k\)</span> random (but not necessarily discrete) indices in the range <span class="math notranslate nohighlight">\([0,n)\)</span>. The selection is performed
+by repeated independent random selections from that range. The elements are returned in no particular order. This
+method is similar in operation with <a class="reference external" href="https://docs.python.org/3/library/random.html#random.choices" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">random.choices()</span></code></a> but returns the choices as an iterator that is lazily
+populated instead of a concrete collection.</p>
+<p>If you need to reuse the result of this operation you need to store it in a collection. A <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> must be used
+in this case as the elements returned might not be unique:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">random_numbers</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">random_choices</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">Random</span><span class="p">()))</span>
 </pre></div>
 </div>
-<p>will alternate between the values 1 and 2 for 5 times before terminating.</p>
+<p>This method returns a generator that will be fully consumed in time proportional to <span class="math notranslate nohighlight">\(k\)</span> in the worst case and
+does not consume additional memory.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>a</strong> (<em>Iterable</em><em>[</em><em>T</em><em>]</em>) – The input iterable.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The size of the population.</p></li>
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The size of the sample.</p></li>
+<li><p><strong>rng</strong> (<em>Random</em>) – The random number generator to use.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>A rotating iterator over the elements of <cite>a</cite>.</p>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – If the conditions <span class="math notranslate nohighlight">\(n \ge 0\)</span> and <span class="math notranslate nohighlight">\(k \ge 0\)</span> are not satisfied.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Iterator[T]</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A generator that holds the values of <span class="math notranslate nohighlight">\(k\)</span> random and discrete integers in the range <span class="math notranslate nohighlight">\([0,n)\)</span>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Iterator[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 </section>
 <section id="shuffled">
-<h2>shuffled<a class="headerlink" href="#shuffled" title="Permalink to this headline">¶</a></h2>
+<h2>shuffled<a class="headerlink" href="#shuffled" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="se.shuffled">
-<span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">shuffled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">se.T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">random.Random</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">se.T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#se.shuffled" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">shuffled</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.10)"><span class="pre">Iterable</span></a><span class="p"><span class="pre">[</span></span><span class="pre">se.T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/random.html#random.Random" title="(in Python v3.10)"><span class="pre">random.Random</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterator" title="(in Python v3.10)"><span class="pre">Iterator</span></a><span class="p"><span class="pre">[</span></span><span class="pre">se.T</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#se.shuffled" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns a generator that iterates through the values of the input iterable in random order.</p>
 <p>This function will make a copy of the input iterable before using it. It is useful when the input is not a random
 access collection, for example a set, and you don’t necessarily need to have the items in a concrete collection, for
@@ -274,7 +282,7 @@ other cases, it probably won’t be any good in terms of performance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>Iterable</em><em>[</em><em>object</em><em>]</em>) – The input iterable.</p></li>
+<li><p><strong>a</strong> (<em>Iterable</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a><em>]</em>) – The input iterable.</p></li>
 <li><p><strong>rng</strong> (<em>Random</em>) – The random number generator.</p></li>
 </ul>
 </dd>
@@ -282,7 +290,7 @@ other cases, it probably won’t be any good in terms of performance.</p>
 <dd class="field-even"><p>A generator for the values of the input collection in random order.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Iterator[object]</p>
+<dd class="field-odd"><p>Iterator[<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)">object</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -315,13 +323,20 @@ other cases, it probably won’t be any good in terms of performance.</p>
               </div>
             </a>
         </div>
-
-        <div class="related-information">
-              Copyright &#169; 2021, Giorgos Stamatelatos |
-            <a class="muted-link" href="_sources/functions.rst.txt"
-               rel="nofollow">
-              Show Source
-            </a>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2021, Giorgos Stamatelatos
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              
+            </div>
+          </div>
         </div>
         
       </footer>
@@ -340,7 +355,7 @@ other cases, it probably won’t be any good in terms of performance.</p>
             <ul>
 <li><a class="reference internal" href="#">Auxiliary functions</a><ul>
 <li><a class="reference internal" href="#random-selections">random_selections</a></li>
-<li><a class="reference internal" href="#rotating-iterator">rotating_iterator</a></li>
+<li><a class="reference internal" href="#random-choices">random_choices</a></li>
 <li><a class="reference internal" href="#shuffled">shuffled</a></li>
 </ul>
 </li>
@@ -357,6 +372,7 @@ other cases, it probably won’t be any good in terms of performance.</p>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js"></script>
+    <script src="_static/scripts/furo.js"></script>
+    <script async="async" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
