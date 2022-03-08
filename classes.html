@@ -397,9 +397,12 @@ properties of the elements inside the data structure.</p>
 </pre></div>
 </div>
 <p>but runs more efficiently than generating all the partition.</p>
+<p>Consecutive invocations of this method are not necessarily independent because no shuffling of the population is
+performed automatically. This behavior can be manually achieved using the <a class="reference internal" href="#se.RandomSystematicPartitioning.reshuffle" title="se.RandomSystematicPartitioning.reshuffle"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reshuffle()</span></code></a> method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Blah blah.</p>
+<dd class="field-odd"><p>A random sample of the population that previously entered the instance based on the random systematic
+sampling algorithm.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#set" title="(in Python v3.10)">set</a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)">object</a>]</p>
