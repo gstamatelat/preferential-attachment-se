@@ -585,6 +585,20 @@ class RandomSystematicPartitioning:
         return groups
 
     def sample(self) -> set[object]:
+        """
+        Implicit implementation of the random systematic sampling method.
+
+        This method should be called after the elements have been added in the instance and is equivalent to
+
+        .. code-block:: python
+
+           random.choice(rsp.partition())
+
+        but runs more efficiently than generating all the partition.
+
+        :return: Blah blah.
+        :rtype: set[object]
+        """
         if self.__n % self.__k != 0:
             raise ValueError("The number of elements acquired must be divisible by k")
         sample: set[object] = set()
