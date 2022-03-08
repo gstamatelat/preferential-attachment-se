@@ -596,7 +596,11 @@ class RandomSystematicPartitioning:
 
         but runs more efficiently than generating all the partition.
 
-        :return: Blah blah.
+        Consecutive invocations of this method are not necessarily independent because no shuffling of the population is
+        performed automatically. This behavior can be manually achieved using the :meth:`reshuffle` method.
+
+        :return: A random sample of the population that previously entered the instance based on the random systematic
+                 sampling algorithm.
         :rtype: set[object]
         """
         if self.__n % self.__k != 0:
