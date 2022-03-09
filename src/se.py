@@ -552,7 +552,7 @@ class RandomSystematicPartitioning:
         Performs a reshuffling on the distinct population items that have been inserted in the instance.
 
         Calling this method is required when independence among consecutive invocations of the :meth:`partition` or
-        :meth:`shuffle` method is required.
+        :meth:`sample` method is required.
 
         :return: The instance itself (self).
         :rtype: RandomSystematicPartitioning
