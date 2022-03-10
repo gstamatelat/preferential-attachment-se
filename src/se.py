@@ -575,7 +575,7 @@ class RandomSystematicPartitioning:
         insertion or reshuffling in-between. It always runs in time proportional to :math:`n` regardless of the
         properties of the elements inside the data structure.
 
-        This method returns a mutable collections that can be safely mutated without compromising the internal state of
+        This method returns a mutable collection that can be safely mutated without compromising the internal state of
         the instance.
 
         :raises ValueError: If the conditions specified (the divisibility and the max frequency) are not fulfilled.
@@ -611,7 +611,7 @@ class RandomSystematicPartitioning:
         Consecutive invocations of this method are not necessarily independent because no shuffling of the population is
         performed automatically. This behavior can be manually achieved using the :meth:`reshuffle` method.
 
-        This method returns a mutable collections that can be safely mutated without compromising the internal state of
+        This method returns a mutable collection that can be safely mutated without compromising the internal state of
         the instance.
 
         :return: A random sample of the population that previously entered the instance based on the random systematic
