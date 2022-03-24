@@ -52,7 +52,7 @@ def se_a(n: int, rng: Random) -> nx.Graph:
     return g
 
 
-def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+def se_b(n: int, m: int, z: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
     r"""
     Returns a random graph using the SE-B preferential attachment algorithm.
 
@@ -60,7 +60,7 @@ def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
 
     :param int n: Number of nodes of the final graph.
     :param int m: Number of edges to attach from a new node to existing nodes.
-    :param int mu: An integer denoting the number of hyperedges that are shuffled before selecting.
+    :param int z: An integer denoting the number of hyperedges that are shuffled before selecting.
     :param Random rng: Random number generator.
     :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
         loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
@@ -86,8 +86,8 @@ def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
             f"Condition n >= |V_0| >= m >= 2 is not met, got n = {n}, m = {m}, |V_0| = {len(initial_graph)}"
         )
 
-    if not mu >= 1:
-        raise ValueError(f"mu must be strictly positive, got mu = {mu}")
+    if not z >= 1:
+        raise ValueError(f"z must be strictly positive, got z = {z}")
 
     # Create the initial hyperedge list
     hyperedge_list: list[set[object]] = RandomSystematicPartitioning(m, rng) \
@@ -111,7 +111,7 @@ def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
         new_hyperedges: Iterator[set[object]] = itertools.cycle([hyperedge_x, hyperedge_y])
         # Select a random hyperedge.
         random_hyperedge: set[object] = RandomSystematicPartitioning(m, rng).add_iterator(
-            itertools.chain(*map(lambda x: hyperedge_list[x], random_choices(len(hyperedge_list), mu, rng)))
+            itertools.chain(*map(lambda x: hyperedge_list[x], random_choices(len(hyperedge_list), z, rng)))
         ).sample()
         # Add its elements into the new hyperedges using a random split.
         # At the same time add the new edges in the graph.
@@ -144,7 +144,7 @@ def se_b(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
     return g
 
 
-def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+def se_c(n: int, m: int, z: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
     r"""
     Returns a random graph using the SE-C preferential attachment algorithm.
 
@@ -152,7 +152,7 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
 
     :param int n: Number of nodes of the final graph.
     :param int m: Number of edges to attach from a new node to existing nodes.
-    :param int mu: An integer denoting the number of hyperedges that are shuffled before selecting.
+    :param int z: An integer denoting the number of hyperedges that are shuffled before selecting.
     :param Random rng: Random number generator.
     :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
         loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
@@ -178,8 +178,8 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
             f"Condition n >= |V_0| >= m >= 2 is not met, got n = {n}, m = {m}, |V_0| = {len(initial_graph)}"
         )
 
-    if not mu >= 1:
-        raise ValueError(f"mu must be strictly positive, got mu = {mu}")
+    if not z >= 1:
+        raise ValueError(f"z must be strictly positive, got z = {z}")
 
     # Create the initial hyperedge list
     hyperedge_list: list[set[object]] = RandomSystematicPartitioning(m, rng) \
@@ -200,7 +200,7 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
         rsp: RandomSystematicPartitioning = RandomSystematicPartitioning(m, rng)
         # Select one random old hyperedge.
         random_hyperedge: set[object] = RandomSystematicPartitioning(m, rng).add_iterator(
-            itertools.chain(*map(lambda x: hyperedge_list[x], random_choices(len(hyperedge_list), mu, rng)))
+            itertools.chain(*map(lambda x: hyperedge_list[x], random_choices(len(hyperedge_list), z, rng)))
         ).sample()
         # Insert its elements into the RSP. At the same time create the edges too.
         for v in shuffled(random_hyperedge, rng):
