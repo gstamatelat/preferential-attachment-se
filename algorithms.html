@@ -293,6 +293,42 @@ a complete graph of <span class="math notranslate nohighlight">\(m\)</span> node
 </dl>
 </dd></dl>
 </section>
+<section id="algorithm-se-d">
+<h2>Algorithm SE-D<a class="headerlink" href="#algorithm-se-d" title="Permalink to this headline">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="se.se_d">
+<span class="sig-prename descclassname"><span class="pre">se.</span></span><span class="sig-name descname"><span class="pre">se_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/random.html#random.Random" title="(in Python v3.10)"><span class="pre">random.Random</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><span class="pre">Optional</span></a><span class="p"><span class="pre">[</span></span><span class="pre">networkx.classes.graph.Graph</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><span class="pre">networkx.classes.graph.Graph</span></span></span><a class="headerlink" href="#se.se_d" title="Permalink to this definition">#</a></dt>
+<dd><p>Returns a random graph using the SE-D preferential attachment algorithm.</p>
+<p>This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.</p>
+<p>The SE-D algorithm uses all available hyperedges in the auxiliary hypergraph structure in the RSS step, one time
+each. As a result, the complexity is not linear with respect to the order of the generated graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of nodes of the final graph.</p></li>
+<li><p><strong>m</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Number of edges to attach from a new node to existing nodes.</p></li>
+<li><p><strong>rng</strong> (<em>Random</em>) – Random number generator.</p></li>
+<li><p><strong>initial_graph</strong> (<em>Optional</em><em>[</em><em>Graph</em><em>]</em>) – Initial network for the algorithm. It must be an undirected graph without self
+loops of multiple edges. The initial graph must satisfy the divisibility <span class="math notranslate nohighlight">\(2|E_0|/m\)</span> and no vertex can have
+degree higher than <span class="math notranslate nohighlight">\(2|E_0|/m\)</span>. It should be connected, although this is not enforced. The initial graph
+will be copied before being used. This argument is optional and if <cite>None</cite> is given then the process starts from
+a complete graph of <span class="math notranslate nohighlight">\(m\)</span> nodes and <span class="math notranslate nohighlight">\(m(m-1)\)</span> edges.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – If <span class="math notranslate nohighlight">\(n \ge |V_0| \ge m \ge 2\)</span> is not satisfied or if the conditions required for the
+<cite>initial_graph</cite> are not fulfilled, namely the divisibility <span class="math notranslate nohighlight">\(2|E_0|/m\)</span> and the maximum degree of
+<span class="math notranslate nohighlight">\(2|E_0|/m\)</span>.</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The resulting graph.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Graph</p>
+</dd>
+</dl>
+</dd></dl>
+</section>
 </section>
 
         </article>
@@ -355,6 +391,7 @@ a complete graph of <span class="math notranslate nohighlight">\(m\)</span> node
 <li><a class="reference internal" href="#algorithm-se-a">Algorithm SE-A</a></li>
 <li><a class="reference internal" href="#algorithm-se-b">Algorithm SE-B</a></li>
 <li><a class="reference internal" href="#algorithm-se-c">Algorithm SE-C</a></li>
+<li><a class="reference internal" href="#algorithm-se-d">Algorithm SE-D</a></li>
 </ul>
 </li>
 </ul>

@@ -17,3 +17,8 @@ Algorithm SE-C
 --------------
 
 .. autofunction:: se.se_c
+
+Algorithm SE-D
+--------------
+
+.. autofunction:: se.se_d
