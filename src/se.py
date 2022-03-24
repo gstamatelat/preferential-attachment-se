@@ -227,6 +227,28 @@ def se_c(n: int, m: int, mu: int, rng: Random, initial_graph: nx.Graph = None) -
 
 
 def se_d(n: int, m: int, rng: Random, initial_graph: nx.Graph = None) -> nx.Graph:
+    r"""
+    Returns a random graph using the SE-D preferential attachment algorithm.
+
+    This algorithm generates an undirected, unweighted graph, without self loops or multiple edges.
+
+    The SE-D algorithm uses all available hyperedges in the auxiliary hypergraph structure in the RSS step, one time
+    each. As a result, the complexity is not linear with respect to the order of the generated graph.
+
+    :param int n: Number of nodes of the final graph.
+    :param int m: Number of edges to attach from a new node to existing nodes.
+    :param Random rng: Random number generator.
+    :param Optional[Graph] initial_graph: Initial network for the algorithm. It must be an undirected graph without self
+        loops of multiple edges. The initial graph must satisfy the divisibility :math:`2|E_0|/m` and no vertex can have
+        degree higher than :math:`2|E_0|/m`. It should be connected, although this is not enforced. The initial graph
+        will be copied before being used. This argument is optional and if `None` is given then the process starts from
+        a complete graph of :math:`m` nodes and :math:`m(m-1)` edges.
+    :raises ValueError: If :math:`n \ge |V_0| \ge m \ge 2` is not satisfied or if the conditions required for the
+        `initial_graph` are not fulfilled, namely the divisibility :math:`2|E_0|/m` and the maximum degree of
+        :math:`2|E_0|/m`.
+    :return: The resulting graph.
+    :rtype: Graph
+    """
     if not m >= 2:
         raise ValueError(
             f"Condition m >= 2 is not met, got m = {m}"
