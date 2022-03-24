@@ -19,7 +19,7 @@ The `se` package
    :maxdepth: 2
    :caption: Resources
 
-   Github <https://github.com/gstamatelat/preferential-attachment-se>
+   Github <https://github.com/gstamatelat/se>
 
 The `se` package provides implementations of the SE-A, SE-B and SE-C algorithms. They are algorithms for the generation
 of scale-free random graphs via the preferential attachment mechanism. These algorithms differ from traditional graph
