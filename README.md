@@ -2,4 +2,4 @@
 
 Supplementary material of submission "Whole Sampling Generation of Scale-Free Graphs".
 
-Documentation: https://james.gr/preferential-attachment-se/
+Documentation: https://james.gr/se/
