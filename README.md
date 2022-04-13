@@ -1,5 +1,5 @@
 # Preferential Attachment SE
 
-Supplementary material of submission "Whole Sampling Generation of Scale-Free Graphs".
+Supplementary material of submission "An Exact, Linear Time Barabási-Albert Algorithm".
 
 Documentation: https://james.gr/se/
